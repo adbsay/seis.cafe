@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #0b0907;
+  --color-surface: #130f0b;
+  --color-raised: #1b150f;
+  --color-line: rgb(233 196 130 / 0.16);
+  --color-cream: #f4ece0;
+  --color-muted: #b5a791;
+  --color-amber: #e4b45f;
+  --color-amber-soft: #f0c677;
+  --color-ok: #8cc79a;
+  --color-warn: #f2a55a;
+  --color-busy: #e8cb5a;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+section[id] {
+  scroll-margin-top: 3.5rem;
+}
+
+/* Cormorant memakai angka old-style (1 mirip huruf I); paksa angka lining agar harga & counter terbaca jelas */
+.font-display {
+  font-feature-settings: "lnum" 1;
+}
+
+::selection {
+  background: rgb(228 180 95 / 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+/* Judul yang difokuskan lewat script (tabindex=-1) tidak perlu cincin fokus */
+[tabindex="-1"]:focus-visible {
+  outline: none;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  background: rgb(5 4 3 / 0.78);
+  backdrop-filter: blur(4px);
+}
+
+/* Grading seragam: semua foto diberi lapisan hangat tipis (low exposure, warm/amber) */
+.photo-grade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgb(214 130 30 / 0.12);
+  mix-blend-mode: soft-light;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Peta dibuat gelap agar menyatu dengan tema */
+.map-dark {
+  filter: invert(92%) hue-rotate(180deg) saturate(0.55) contrast(0.92) brightness(0.95);
+}
